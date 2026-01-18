@@ -274,7 +274,7 @@ export interface BrokerFlowDailyData {
 export interface BrokerFlowActivity {
   broker_code: string;
   stock_code: string;
-  broker_status: 'Bandar' | 'Whale';
+  broker_status: 'Bandar' | 'Whale' | 'Retail' | 'Mix';
   stock_name: string;
   net_value: string;
   total_buy_value: string;

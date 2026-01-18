@@ -1398,6 +1398,16 @@ h3 {
   color: #38ef7d;
 }
 
+.broker-code-badge.retail {
+  background: rgba(245, 87, 108, 0.2);
+  color: #f5576c;
+}
+
+.broker-code-badge.mix {
+  background: rgba(240, 147, 251, 0.2);
+  color: #f093fb;
+}
+
 .broker-type-label {
   font-weight: 500;
   text-transform: uppercase;

@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
     url.searchParams.set('sort_by', 'consistency');
     url.searchParams.set('mode', 'accum');
     url.searchParams.set('lookback_days', lookbackDays);
-    url.searchParams.set('broker_status', 'Bandar,Whale');
+    url.searchParams.set('broker_status', 'Bandar,Whale,Retail,Mix');
     url.searchParams.set('search', emiten.toLowerCase());
 
     const response = await fetch(url.toString(), {
