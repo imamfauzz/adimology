@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import type { StockInput } from '@/lib/types';
 import { getDefaultDate } from '@/lib/utils';
-import { CheckCircle2, XCircle, MinusCircle } from 'lucide-react';
+import { Check, X, Minus } from 'lucide-react';
 
 interface InputFormProps {
   onSubmit: (data: StockInput) => void;
@@ -165,9 +165,9 @@ export default function InputForm({
                 }}
               />
               <div style={{ display: 'flex', alignItems: 'center', opacity: currentFlag ? 1 : 0, transition: 'opacity 0.2s' }}>
-                {currentFlag === 'OK' && <CheckCircle2 size={13} color="#3b82f6" fill="rgba(59, 130, 246, 0.2)" />}
-                {currentFlag === 'NG' && <XCircle size={13} color="#f97316" fill="rgba(249, 115, 22, 0.2)" />}
-                {currentFlag === 'Neutral' && <MinusCircle size={13} color="var(--text-secondary)" />}
+                {currentFlag === 'OK' && <Check size={14} color="#3b82f6" strokeWidth={3} />}
+                {currentFlag === 'NG' && <X size={14} color="#f97316" strokeWidth={3} />}
+                {currentFlag === 'Neutral' && <Minus size={14} color="var(--text-secondary)" strokeWidth={3} />}
               </div>
             </div>
           </div>
@@ -204,12 +204,22 @@ export default function InputForm({
           <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
             <button
               type="submit"
-              className="btn btn-primary compact-btn"
               disabled={loading}
               style={{
                 minWidth: '100px',
+                height: '38px',
                 fontSize: '0.8rem',
-                fontWeight: '600'
+                fontWeight: '600',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+                cursor: loading ? 'not-allowed' : 'pointer',
+                transition: 'all 0.2s',
+                background: '#7c3aed',
+                color: 'white',
+                border: '1px solid #7c3aed',
+                opacity: loading ? 0.6 : 1
               }}
             >
               {loading ? '...' : 'Adimology'}
@@ -252,50 +262,76 @@ export default function InputForm({
           </div>
 
           {/* Flagging Buttons */}
-          <div className="flag-container" style={{ display: 'flex', gap: '0.3rem', marginLeft: 'auto', borderLeft: '1px solid rgba(255,255,255,0.1)', paddingLeft: '0.5rem' }}>
+          <div className="flag-container" style={{ 
+            display: 'flex', 
+            gap: '0.4rem', 
+            marginLeft: 'auto', 
+            borderLeft: '1px solid rgba(255,255,255,0.1)', 
+            paddingLeft: '0.8rem',
+            alignItems: 'center'
+          }}>
             <button
               type="button"
               onClick={() => handleFlag('OK')}
-              className={`btn compact-btn ${currentFlag === 'OK' ? 'active' : ''}`}
               title="Mark as OK"
               style={{
-                padding: '0.4rem',
-                background: currentFlag === 'OK' ? 'rgba(59, 130, 246, 0.25)' : 'rgba(59, 130, 246, 0.05)',
-                color: '#3b82f6',
-                border: `1px solid ${currentFlag === 'OK' ? '#3b82f6' : 'rgba(59, 130, 246, 0.2)'}`,
-                boxShadow: currentFlag === 'OK' ? '0 0 10px rgba(59, 130, 246, 0.3)' : 'none'
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                background: currentFlag === 'OK' ? '#3b82f6' : 'rgba(59, 130, 246, 0.1)',
+                color: currentFlag === 'OK' ? 'white' : '#3b82f6',
+                border: `1px solid ${currentFlag === 'OK' ? '#3b82f6' : 'rgba(59, 130, 246, 0.3)'}`,
+                boxShadow: currentFlag === 'OK' ? '0 4px 10px rgba(59, 130, 246, 0.4)' : 'none'
               }}
             >
-              <CheckCircle2 size={16} fill={currentFlag === 'OK' ? 'rgba(59, 130, 246, 0.4)' : 'none'} />
+              <Check size={22} strokeWidth={3} />
             </button>
             <button
               type="button"
               onClick={() => handleFlag('NG')}
-              className={`btn compact-btn ${currentFlag === 'NG' ? 'active' : ''}`}
               title="Mark as NG"
               style={{
-                padding: '0.4rem',
-                background: currentFlag === 'NG' ? 'rgba(249, 115, 22, 0.25)' : 'rgba(249, 115, 22, 0.05)',
-                color: '#f97316',
-                border: `1px solid ${currentFlag === 'NG' ? '#f97316' : 'rgba(249, 115, 22, 0.2)'}`,
-                boxShadow: currentFlag === 'NG' ? '0 0 10px rgba(249, 115, 22, 0.3)' : 'none'
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                background: currentFlag === 'NG' ? '#f97316' : 'rgba(249, 115, 22, 0.1)',
+                color: currentFlag === 'NG' ? 'white' : '#f97316',
+                border: `1px solid ${currentFlag === 'NG' ? '#f97316' : 'rgba(249, 115, 22, 0.3)'}`,
+                boxShadow: currentFlag === 'NG' ? '0 4px 10px rgba(249, 115, 22, 0.4)' : 'none'
               }}
             >
-              <XCircle size={16} fill={currentFlag === 'NG' ? 'rgba(249, 115, 22, 0.4)' : 'none'} />
+              <X size={22} strokeWidth={3} />
             </button>
             <button
               type="button"
               onClick={() => handleFlag('Neutral')}
-              className={`btn compact-btn ${currentFlag === 'Neutral' ? 'active' : ''}`}
               title="Mark as Neutral"
               style={{
-                padding: '0.4rem',
-                background: currentFlag === 'Neutral' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.05)',
-                color: 'var(--text-secondary)',
-                border: `1px solid ${currentFlag === 'Neutral' ? 'rgba(255,255,255,0.4)' : 'rgba(255, 255, 255, 0.1)'}`
+                width: '38px',
+                height: '38px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                transition: 'all 0.2s',
+                background: currentFlag === 'Neutral' ? 'var(--text-secondary)' : 'rgba(255, 255, 255, 0.05)',
+                color: currentFlag === 'Neutral' ? 'white' : 'var(--text-secondary)',
+                border: `1px solid ${currentFlag === 'Neutral' ? 'var(--text-secondary)' : 'rgba(255, 255, 255, 0.1)'}`,
+                boxShadow: currentFlag === 'Neutral' ? '0 4px 10px rgba(0, 0, 0, 0.1)' : 'none'
               }}
             >
-              <MinusCircle size={16} />
+              <Minus size={22} strokeWidth={3} />
             </button>
           </div>
         </div>
